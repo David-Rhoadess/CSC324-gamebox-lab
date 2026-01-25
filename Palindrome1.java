@@ -1,7 +1,7 @@
 import java.util.Objects;
 import java.util.Scanner;
 
-public class Palindrome{
+public class Palindrome1{
   private static boolean isPal (Integer inputLength, Integer userInteger) {
     Integer len = inputLength;
     for (int x = 0; x < inputLength/2; x++) {
