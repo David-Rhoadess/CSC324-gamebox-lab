@@ -30,7 +30,7 @@ public class GameBox {
             outputWriter.flush();
             outputWriter.close();
           } else if (userInteger % 4 == 2) {
-            File driverTestInput = new File("BinarySearch.txt");
+            File driverTestInput = new File("BinarySearchTest1.txt");
             FileInputStream fileInput = new FileInputStream(driverTestInput);
             String outputLog = BinarySearch(fileInput);
             PrintWriter outputWriter = new PrintWriter("BinarySearchOutput.txt");
@@ -83,6 +83,40 @@ public class GameBox {
             user_input = terminal.nextLine();
         }
         terminal.close();
+        return outputLog.toString();
+    }
+
+    public static String BinarySearch(InputStream input) {
+        System.out.println("Welcome to word guessing game! Pick a integer from 1 to 100.");
+            
+        int lower = 1;
+        int higher = 100;
+        int mid;
+        Scanner scanner = new Scanner(input);
+        StringBuffer outputLog = new StringBuffer();
+
+        while (lower <= higher) {
+            mid = lower + (higher - lower) / 2;
+            System.out.println("Is this the number you think of? " + mid);
+            outputLog.append("Is this the number you think of? " + mid + "\n");
+            System.out.println("Enter equal, up, or down");
+            outputLog.append("Enter equal, up, or down\n");
+            char userInput = scanner.next().charAt(0);
+            outputLog.append(userInput + "\n");
+            if (userInput == 'e') {
+                System.out.println("Your number is " + mid);
+                outputLog.append("Your number is " + mid + "\n");
+                break;
+            } else if (userInput == 'u') {
+                lower = mid + 1;
+            } else if (userInput == 'd') {
+                higher = mid - 1;
+            } else {
+                System.out.println("Please enter equal, up, or down");
+                outputLog.append("Please enter equal, up, or down\n");
+            }
+        }
+        scanner.close();
         return outputLog.toString();
     }
 

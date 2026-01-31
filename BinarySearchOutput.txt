@@ -1,0 +1,13 @@
+Is this the number you think of? 50
+Enter equal, up, or down
+u
+Is this the number you think of? 75
+Enter equal, up, or down
+u
+Is this the number you think of? 88
+Enter equal, up, or down
+d
+Is this the number you think of? 81
+Enter equal, up, or down
+e
+Your number is 81
