@@ -1,8 +1,3 @@
-Rock 
-Paper 
-Rock 
-Rock 
-Rock 
-Paper 
-Rock 
-Rock 
+User Chooses: Rock
+System Chooses: Scissors 
+User Wins!

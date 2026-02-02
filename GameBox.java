@@ -38,13 +38,13 @@ public class GameBox {
             outputWriter.flush();
             outputWriter.close();
           } else if (userInteger % 4 == 3) {
-            File driverTestInput = new File("Palindrome.txt");
-            FileInputStream fileInput = new FileInputStream(driverTestInput);
-            String outputLog = Palindrome(fileInput);
-            PrintWriter outputWriter = new PrintWriter("PalindromeOutput.txt");
-            outputWriter.write(outputLog);
-            outputWriter.flush();
-            outputWriter.close();
+            //File driverTestInput = new File("Palindrome.txt");
+            //FileInputStream fileInput = new FileInputStream(driverTestInput);
+            //String outputLog = Palindrome(fileInput);
+            //PrintWriter outputWriter = new PrintWriter("PalindromeOutput.txt");
+            //outputWriter.write(outputLog);
+            // outputWriter.flush();
+            // outputWriter.close();
           } else if (userInteger % 4 == 0) {
             File driverTestInput = new File("SpeedMath.txt");
             FileInputStream fileInput = new FileInputStream(driverTestInput);
@@ -63,22 +63,61 @@ public class GameBox {
     }
 
     public static String RockPaperScissorsGame(InputStream input) {
-        System.out.println("Welcome to Rock Paper Scissors, press enter to get my next choice, type \"exit\" to exit");
+        System.out.println("Welcome to Rock Paper Scissors, press enter \"Rock\", \"Paper\", or \"Scissors\", type \"exit\" to exit");
         Scanner terminal = new Scanner(input);
         String user_input = terminal.nextLine();
         StringBuffer outputLog = new StringBuffer();
         Random number_generator = new Random();
         while(user_input.compareTo("exit") != 0) {
+            System.out.println("User Chooses: " + user_input);
+            outputLog.append("User Chooses: " + user_input + "\n");
             int rand_int = number_generator.nextInt(4);
             if (rand_int == 0 || rand_int == 1) {
-                System.out.println("Rock");
-                outputLog.append("Rock \n");
+                System.out.println("System Chooses: Rock");
+                outputLog.append("System Chooses: Rock \n");
+                if (user_input.compareTo("Paper") == 0) {
+                    System.out.println("User Wins!");
+                    outputLog.append("User Wins! \n");
+                    break;
+                } else if (user_input.compareTo("Scissors") == 0) {
+                    System.out.println("System Wins!");
+                    outputLog.append("System Wins! \n");
+
+                    break;
+                } else {
+                    System.out.println("Tie, start next round");
+                    outputLog.append("Tie, start next round \n");
+                }
             } else if (rand_int == 2) {
-                System.out.println("Paper");
-                outputLog.append("Paper \n");
+                System.out.println("System Chooses: Paper");
+                outputLog.append("System Chooses: Paper \n");
+                if (user_input.compareTo("Scissors") == 0) {
+                    System.out.println("User Wins!");
+                    outputLog.append("User Wins!\n");
+                    break;
+                } else if (user_input.compareTo("Rock") == 0) {
+                    System.out.println("System Wins!");
+                    outputLog.append("System Wins!\n");
+                    break;
+                } else {
+                    System.out.println("Tie, start next round");
+                    outputLog.append("Tie, start next round\n");
+                }
             } else {
-                System.out.println("Scissors");
-                outputLog.append("Scissors \n");
+                System.out.println("System Chooses: Scissors");
+                outputLog.append("System Chooses: Scissors \n");
+                if (user_input.compareTo("Rock") == 0) {
+                    System.out.println("User Wins!");
+                    outputLog.append("User Wins!\n");
+                    break;
+                } else if (user_input.compareTo("Paper") == 0) {
+                    System.out.println("System Wins!");
+                    outputLog.append("System Wins!\n");
+                    break;
+                } else {
+                    System.out.println("Tie, start next round");
+                    outputLog.append("Tie, start next round\n");
+                }
             }
             user_input = terminal.nextLine();
         }
