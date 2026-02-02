@@ -22,38 +22,59 @@ public class GameBox {
           userInput = terminal.nextLine();
           int userInteger = Integer.parseInt(userInput);
           if (userInteger % 4 == 1) {
-            File driverTestInput = new File("RockPaperScissorsTest1.txt");
-            FileInputStream fileInput = new FileInputStream(driverTestInput);
-            String outputLog = RockPaperScissorsGame(fileInput);
-            PrintWriter outputWriter = new PrintWriter("RockPaperScissorsTest1Output.txt");
-            outputWriter.write(outputLog);
+            PrintWriter outputWriter = new PrintWriter("RockPaperScissorsOutput.txt");
+            for (int i = 1; i <=3; i++) {
+              outputWriter.append("Test " + i + ": \n");
+              System.out.println("Test " + i + ": \n");
+              File driverTestInput = new File("RockPaperScissorsTest" + i +".txt");
+              FileInputStream fileInput = new FileInputStream(driverTestInput);
+              String outputLog = RockPaperScissorsGame(fileInput);
+              outputWriter.append(outputLog);
+            }
+            System.out.println("Output saved to RockPaperScissorsOutput.txt");
             outputWriter.flush();
             outputWriter.close();
           } else if (userInteger % 4 == 2) {
-            File driverTestInput = new File("BinarySearchTest1.txt");
-            FileInputStream fileInput = new FileInputStream(driverTestInput);
-            String outputLog = BinarySearch(fileInput);
             PrintWriter outputWriter = new PrintWriter("BinarySearchOutput.txt");
-            outputWriter.write(outputLog);
+            for (int i = 1; i <=3; i++) {
+              outputWriter.append("Test " + i + ": \n");
+              System.out.println("Test " + i + ": \n");
+              File driverTestInput = new File("BinarySearchTest" + i +".txt");
+              FileInputStream fileInput = new FileInputStream(driverTestInput);
+              String outputLog = BinarySearch(fileInput);
+              outputWriter.append(outputLog);
+            }
+            System.out.println("Output saved to BinarySearchOutput.txt");
             outputWriter.flush();
             outputWriter.close();
           } else if (userInteger % 4 == 3) {
-            File driverTestInput = new File("Palindrome.txt");
-            FileInputStream fileInput = new FileInputStream(driverTestInput);
-            String outputLog = Palindrome(fileInput);
-            PrintWriter outputWriter = new PrintWriter("PalindromeOutput.txt");
-            outputWriter.write(outputLog);
+            PrintWriter outputWriter = new PrintWriter("Palindrome.txt");
+            for (int i = 1; i <=3; i++) {
+              outputWriter.append("Test " + i + ": \n");
+              System.out.println("Test " + i + ": \n");
+              File driverTestInput = new File("Palindrome" + i +".txt");
+              FileInputStream fileInput = new FileInputStream(driverTestInput);
+              String outputLog = Palindrome(fileInput);
+              outputWriter.append(outputLog);
+            }
+            System.out.println("Output saved to Palindrome.txt");
             outputWriter.flush();
             outputWriter.close();
           } else if (userInteger % 4 == 0) {
-            File driverTestInput = new File("SpeedMath.txt");
-            FileInputStream fileInput = new FileInputStream(driverTestInput);
-            String outputLog = CustomGame(fileInput);
             PrintWriter outputWriter = new PrintWriter("SpeedMathOutput.txt");
-            outputWriter.write(outputLog);
+            for (int i = 1; i <=3; i++) {
+              outputWriter.append("Test " + i + ": \n");
+              System.out.println("Test " + i + ": \n");
+              File driverTestInput = new File("SpeedMathTest" + i +".txt");
+              FileInputStream fileInput = new FileInputStream(driverTestInput);
+              String outputLog = CustomGame(fileInput);
+              outputWriter.append(outputLog);
+            }
+            System.out.println("Output saved to SpeedMathOutput.txt");
             outputWriter.flush();
             outputWriter.close();
           } 
+
         } else {
             terminal.close();
             throw new IOException("Valid inputs are G or D");
@@ -141,6 +162,7 @@ public class GameBox {
             System.out.println("Enter equal, up, or down");
             outputLog.append("Enter equal, up, or down\n");
             char userInput = scanner.next().charAt(0);
+            System.out.println(userInput + "\n");
             outputLog.append(userInput + "\n");
             if (userInput == 'e') {
                 System.out.println("Your number is " + mid);
@@ -214,6 +236,7 @@ public class GameBox {
       Timer clock = new Timer();
 
       System.out.print("What is " + numberOne);
+      outputLog.append("What is " + numberOne);
       if (operationNumber == 0) {
         System.out.print(" + ");
         outputLog.append(" + ");
@@ -232,23 +255,22 @@ public class GameBox {
         answer = numberOne % numberTwo;
     }
     System.out.println(numberTwo + " = ?");
+    outputLog.append(numberTwo + " = ? \n");
+    
     // TimeUnit.SECONDS.sleep(5);
 
     long timeStart = Instant.now().getEpochSecond();
     user_input = terminal.nextLine();
     int user_Integer = Integer.parseInt(user_input);
-    double percentageCorrect = 0.0;
-    if (answer == 0) {
-      percentageCorrect = user_Integer;
-    } else if (user_Integer > answer) {
-      percentageCorrect = (100 * ((double) user_Integer/(double) answer)) % 100;
-    } else {
-      percentageCorrect = 100 - (100 * ((double) user_Integer/(double) answer)) % 100;
-    }
+    int correctness = Math.abs(answer - user_Integer);
     long timeEnd = Instant.now().getEpochSecond();
     long length = timeEnd - timeStart;
 
-    System.out.println("You are " + percentageCorrect + "% away from the correct answer: " + answer +". It takes you " + length + " seconds!");
+    System.out.println("Your guess was " + user_Integer +"!");
+    outputLog.append("Your guess was " + user_Integer + "! \n");
+    System.out.println("You are " + correctness + " away from the correct answer: " + answer +". It took you " + length + " seconds!");
+    outputLog.append("You are " + correctness + " away from the correct answer: " + answer +". It took you " + length + " seconds! \n");
+    
     
     terminal.close();
 
