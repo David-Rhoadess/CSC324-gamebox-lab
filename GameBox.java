@@ -208,6 +208,7 @@ public class GameBox {
         Integer userInteger = Integer.parseInt(userInput);
         
         outputLog.append(userInput).append("\n");
+        System.out.println(userInput);
 
         Integer inputLength = 1 + (int) Math.floor(Math.log10(userInteger));
 
