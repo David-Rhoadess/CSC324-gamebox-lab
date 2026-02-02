@@ -1,10 +1,10 @@
-
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.PrintWriter;
 import java.time.Instant;
+import java.util.Objects;
 import java.util.Random;
 import java.util.Scanner;
 import java.util.Timer;
@@ -38,13 +38,13 @@ public class GameBox {
             outputWriter.flush();
             outputWriter.close();
           } else if (userInteger % 4 == 3) {
-            //File driverTestInput = new File("Palindrome.txt");
-            //FileInputStream fileInput = new FileInputStream(driverTestInput);
-            //String outputLog = Palindrome(fileInput);
-            //PrintWriter outputWriter = new PrintWriter("PalindromeOutput.txt");
-            //outputWriter.write(outputLog);
-            // outputWriter.flush();
-            // outputWriter.close();
+            File driverTestInput = new File("Palindrome.txt");
+            FileInputStream fileInput = new FileInputStream(driverTestInput);
+            String outputLog = Palindrome(fileInput);
+            PrintWriter outputWriter = new PrintWriter("PalindromeOutput.txt");
+            outputWriter.write(outputLog);
+            outputWriter.flush();
+            outputWriter.close();
           } else if (userInteger % 4 == 0) {
             File driverTestInput = new File("SpeedMath.txt");
             FileInputStream fileInput = new FileInputStream(driverTestInput);
@@ -156,6 +156,48 @@ public class GameBox {
             }
         }
         scanner.close();
+        return outputLog.toString();
+    }
+
+    private static boolean isPal (Integer inputLength, Integer userInteger) {
+        Integer len = inputLength;
+        for (int x = 0; x < inputLength/2; x++) {
+            Integer last = userInteger % 10;
+            Integer first = userInteger / (int) Math.pow(10, (len - 1));
+            userInteger = userInteger % (int) Math.pow(10, (len - 1));
+            userInteger = userInteger / 10;
+            len = len - 2;
+            if (!Objects.equals(first, last)) {
+            return false;
+            }
+        }
+        return true;
+    }
+    public static String Palindrome(InputStream input) {
+        StringBuffer outputLog = new StringBuffer();
+        System.out.println("Welcome to \"is this integer a palindrome?\", type \"exit\" to exit");
+        outputLog.append("Welcome to \"is this integer a palindrome?\", type \"exit\" to exit \n");
+        Scanner inputScanner = new Scanner(input);
+
+        System.out.print("Enter a whole number: ");
+        outputLog.append("Enter a whole number: ");
+        String userInput = inputScanner.nextLine();
+
+        Integer userInteger = Integer.parseInt(userInput);
+        
+        outputLog.append(userInput).append("\n");
+
+        Integer inputLength = 1 + (int) Math.floor(Math.log10(userInteger));
+
+        boolean palindrome = isPal(inputLength, userInteger);
+        if (palindrome) {
+            System.out.println(userInteger + " is a palindrome.");
+            outputLog.append(userInteger).append(" is a palindrome. \n");
+        } else {
+            System.out.println(userInteger + " is NOT a palindrome.");
+            outputLog.append(userInteger).append(" is NOT a palindrome. \n");
+        }
+        inputScanner.close();
         return outputLog.toString();
     }
 
